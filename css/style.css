@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+body{
+    display: flex;
+    /*justify-content: center;*/
+    align-items:center;
+    flex-direction: column;
+    width:95%;
+    height:95%;
+}
+.abril{
+    font-family:'Abril Fatface';
+}
+    .abril_title{
+        font-size:15px;
+    }
+.color--white{
+    color:#ffff;
+}
+.table{
+    display: flex;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    background: url('../img/pokerTable.jpg') no-repeat center top;
+    background-size: contain;
+}
+.ace{
+    display:flex;
+    justify-self: center;
+    width:5%;
+    height:auto;
+    transition-property: width;
+    transition-duration: 1s;
+    height:auto;
+}
+.ace:hover{
+    width:8%;
+}
+.row{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+.form{
+    width:20%;
+    display:none;
+    flex-direction:column;
+}
+select{
+    height:70%;
+}
+@media only screen and (max-width: 600px) {
+.table{
+    height:20%;
+}
+.form{
+    width:50%;
+}
+select{
+    height:50%;
+}
+}
