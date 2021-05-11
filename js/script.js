@@ -1,4 +1,21 @@
+const num = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+const seeds =["C","D","S","H"];
+var deck = [];
 
+/**funzione che crea il mazzo completo a partire dall'array del numero di carte per seme e un array col seme, 
+ * se l'array restituito è 52 il test è passed
+ */
+var createDeck = (num,seeds) =>{
+    for(y=0;y<=seeds.length-1;y++){
+        for(i=0;i<=num.length-1;i++){
+          var elem = num[i]+(seeds[y]);
+          deck.push(elem);
+          console.log(deck.length);
+        }
+      }
+      if (deck.length === 52) return true;
+      else return false;
+}
 
 var openMenu = () =>{
     var btn_start = document.querySelector(".ace");
@@ -17,18 +34,15 @@ var sendData = () =>{
 var checkData = (data,cards) =>{
         if ((data[0] === "null")||(data[0] === "undefined")||(data[0] ==="")) return false;
         else{ 
-            giveCards(data);
-            return data;
+            return true;
         }
 }
-var giveCards = (data) =>{
-    const cards = require ("./cards");
-    /*var cards = ["1C.jpg","1D.jpg","1H.jpg","1S.jpg","2C.jpg","2D.jpg","2H.jpg","2S.jpg"];*/
+/*var giveCards = (data) =>{
         for (i=0;i<=data[1]-1;i++){
             console.log(cards[i]);
             console.log(cards.assopicca);
         }
-}
+}*/
 
 
-module.exports = {checkData};
+module.exports = {checkData,createDeck};
