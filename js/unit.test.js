@@ -9,6 +9,6 @@ test("function which check if the field name isn't empty",()=>{
 
 test("function which create the 52 card deck",()=>{
     array1 = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-    array2 =["C","D","S","H"];
-    expect(funct.createDeck(array1,array2)).toBeTruthy();
+    array2 = ["C","D","S","H"];
+    expect(funct.createDeck(array1,array2)).toContain('1C');
 });
