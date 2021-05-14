@@ -34,21 +34,14 @@ var sendData = () =>{
 var checkData = (data,cards) =>{
         if ((data[0] === "null")||(data[0] === "undefined")||(data[0] ==="")) return false;
         else{
-            console.log(createDeck(num,seeds)); 
+            console.log(createCard(cards)); 
             return true;
         }
 }
-var createHand = (data) =>{
-    var numCards = 52;
-    var n_players = data[1];
-    dech = createDeck(num,seeds);
-    hand = [];
-    for (i=0;i<=n_players;i++){
-        for(y=0;y<=4;y++){
-            z =Math.round(Math.random()*51)+1;;
-            hand[y]= dech[z];
-        }
-    }
-  return hand;
-}
-module.exports = {checkData,createDeck};
+/** funzione che genera una carta casuale partendo dall'array del mazzo intero */
+var createCard = (cards) =>{
+    leng = cards.length;
+    var x = Math.round((Math.random()*leng)+1);
+    return cards[x];
+}  
+module.exports = {checkData,createDeck,createCard};
