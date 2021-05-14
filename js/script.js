@@ -12,7 +12,6 @@ var createDeck = (num,seeds) =>{
           deck.push(elem);
         }
       }
-      console.log(deck.length);
       if (deck.length === 52) return deck;
       else return false;
 }
@@ -34,7 +33,7 @@ var sendData = () =>{
 var checkData = (data,cards) =>{
         if ((data[0] === "null")||(data[0] === "undefined")||(data[0] ==="")) return false;
         else{
-            console.log(createCard(cards)); 
+            console.log(createCard(createDeck(num,seeds))); 
             return true;
         }
 }

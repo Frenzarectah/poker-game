@@ -14,6 +14,6 @@ test("function which creates the 52 card deck",()=>{
 });
 
 test("function which extrapolate a single random card from the complete deck",()=>{
-var array = ["1A","1B","1C","1D","1F"];
+var array = ["1A","1B","1C","1D","1F","1A","1A","1A","1B","1C","1D","1F","1A"];
 expect(funct.createCard(array)).toBeDefined();
 });
