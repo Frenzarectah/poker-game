@@ -37,13 +37,22 @@ var checkData = (data,cards) =>{
             return true;
         }
 }
-/** funzione che genera una carta casuale partendo dall'array del mazzo intero */
-var createCard = (cards) =>{
+/** funzione che genera una mano di gioco partendo dall'array del mazzo intero */
+var createHand = (cards) =>{
     leng = cards.length;
+    var i = 0;
+    var hand =[];
     var x = Math.round((Math.random()*leng)+1);
-    return cards[x];
+    while ((i<=4)&&(hand.includes(cards[x])===false)){
+        hand[i] = cards[x];
+        cards[x]="";
+        i = i+1;
+        x = Math.round((Math.random()*leng)+1);
+    }
+    return hand;
+
 }  
-/***/
+/**
 var insertHand = (cards)=>{
     var i = 0;
     var hand = [];
@@ -56,6 +65,7 @@ var insertHand = (cards)=>{
     }
     return hand;
 }
-console.log(insertHand(cards));
+*/
+console.log(createHand(cards));
 
 module.exports = {checkData,createDeck,createCard};
