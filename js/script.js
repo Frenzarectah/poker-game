@@ -4,7 +4,7 @@ const seeds =["C","D","S","H"];
 /**funzione che crea il mazzo completo a partire dall'array del numero di carte per seme e un array col seme, 
  * se l'array restituito è 52 il test è passed
  */
-var createDeck = (num,seeds) =>{
+var createDeck = () =>{
     var deck =[];
     for(y=0;y<=seeds.length-1;y++){
         for(i=0;i<=num.length-1;i++){
@@ -15,7 +15,7 @@ var createDeck = (num,seeds) =>{
       if (deck.length === 52) return deck;
       else return false;
 }
-
+var cards = createDeck();
 var openMenu = () =>{
     var btn_start = document.querySelector(".ace");
     var form = document.querySelector(".form");
@@ -33,7 +33,7 @@ var sendData = () =>{
 var checkData = (data,cards) =>{
         if ((data[0] === "null")||(data[0] === "undefined")||(data[0] ==="")) return false;
         else{
-            console.log(createCard(createDeck(num,seeds))); 
+            /*console.log(createCard(createDeck()));*/ 
             return true;
         }
 }
@@ -43,4 +43,19 @@ var createCard = (cards) =>{
     var x = Math.round((Math.random()*leng)+1);
     return cards[x];
 }  
+/***/
+var insertHand = (cards)=>{
+    var i = 0;
+    var hand = [];
+    var card;
+    while ((i<=4)&&(hand.includes(card)===false)){
+        card = createCard(cards);
+        hand[i] = card;
+        i = i+1;
+        card = createCard(cards);
+    }
+    return hand;
+}
+console.log(insertHand(cards));
+
 module.exports = {checkData,createDeck,createCard};
