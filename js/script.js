@@ -40,9 +40,19 @@ var checkData = (form,cards) =>{
         else{
             datas[0] = createDeck(); 
             datas[1] = form;
-            console.log(createHand(datas[0]));
+            console.log(destrCard(datas));
             return datas;
         }
+}
+var destrCard = (data) =>{
+    var hand = [];
+    var carte = data[0];
+    var n_players = parseInt(data[1][1]);
+    var i = 0;
+    for (i=0;i++;i<=n_players){
+        hand = createHand(carte);    
+    }
+    return hand
 }
 
 /** funzione che genera una mano di gioco partendo dall'array del mazzo intero */
@@ -51,7 +61,7 @@ var createHand = (cards) =>{
     var i = 0;
     var hand =[];
     var x = Math.round((Math.random()*leng)+1);
-    while ((i<=4)&&(hand.includes(cards[x])===false)){
+    while (((i<=4)&&(hand.includes(cards[x])===false))&&(cards[x]!=="")){
         hand[i] = cards[x];
         cards[x]="";
         i = i+1;
