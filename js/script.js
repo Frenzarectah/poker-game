@@ -15,7 +15,9 @@ var createDeck = () =>{
       if (deck.length === 52) return deck;
       else return false;
 }
-var cards = createDeck();
+
+var cards = createDeck();  /** esportazione del mazzo creato nella funzione createDeck all'esterno di essa */
+
 var openMenu = () =>{
     var btn_start = document.querySelector(".ace");
     var form = document.querySelector(".form");
@@ -24,19 +26,25 @@ var openMenu = () =>{
     form.style.display = "flex";
 }
 var sendData = () =>{
-    var data = [];
-     data[0] = document.querySelector(".name").value;
-     data[1]= document.querySelector(".select_player").value;
-    return data;
+    var form = [];
+     form[0] = document.querySelector(".name").value;
+     form[1]= document.querySelector(".select_player").value;
+    return form;
 }
-/**funzione atta al controllo dell'immissione del nome utente che non può essere vuoto */
-var checkData = (data,cards) =>{
-        if ((data[0] === "null")||(data[0] === "undefined")||(data[0] ==="")) return false;
+/**funzione atta al controllo dell'immissione dei dati nel form, se tutto è ok allora restituisce mazzo completo e 
+ * dati immessi
+ */
+var checkData = (form,cards) =>{
+        datas = [];
+        if ((form[0] === "null")||(form[0] === "undefined")||(form[0] ==="")) return false;
         else{
-            /*console.log(createCard(createDeck()));*/ 
-            return true;
+            datas[0] = createDeck(); 
+            datas[1] = form;
+            console.log(createHand(datas[0]));
+            return datas;
         }
 }
+
 /** funzione che genera una mano di gioco partendo dall'array del mazzo intero */
 var createHand = (cards) =>{
     leng = cards.length;
@@ -66,6 +74,4 @@ var insertHand = (cards)=>{
     return hand;
 }
 */
-console.log(createHand(cards));
-
 module.exports = {checkData,createDeck,createCard};
