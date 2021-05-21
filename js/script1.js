@@ -30,29 +30,31 @@ var sendData = () =>{
 //creazione della funzione di gioco, prende dati del form e mazzo,crea randomicamente carte e distribuisce
 var createGame = (data) =>{
     var result = [];
+    k = 0;
     var n_players = data[1];
-    var mano = createHand(deck); 
-    return mano;
+    for(k=0;k<=n_players-1;k++){
+        result[k] = createHand(deck);
+        console.log("molto bene "+result[k]);
+    }
+    return result;
 }
 
+//funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
 var createHand = (cards) =>{
     leng = cards.length;
     var i = 0;
     var hand =[];
     var x = Math.round((Math.random()*leng)+1);
-    while ((i!=5)&&(i<=5)&&(((hand.includes(cards[x])===false)&&(cards[x]!==""))&&(cards[x] !==undefined))){
-        hand[i] = cards[x];
-        cards[x]="";
-        i = i+1;
-        x = Math.round((Math.random()*leng)+1);
-    }
-    return hand;
-
-}  
-
-
-
-
+   for(i=0;i<=4;i++){
+       if ((hand.includes(cards[x])==false)&&(cards[x]!=="")&&(cards[x]!==undefined)){
+            hand[i] = cards[x];
+            cards[x]="";
+            x = Math.round((Math.random()*leng)+1);
+       }else continue;
+        
+   }
+   return hand;
+}
 
 
 //funzione unicamente per aprire dorm di immissione dati
@@ -64,3 +66,6 @@ var openMenu = () =>{
     btn_start.remove();
     form.style.display = "flex";
 }
+
+
+module.exports = {createDeck,createHand};
