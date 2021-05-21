@@ -52,7 +52,7 @@ var destrCard = (data) =>{
     for (i=0;i++;i<=n_players){
         hand = createHand(carte);    
     }
-    return hand
+    return hand;
 }
 
 /** funzione che genera una mano di gioco partendo dall'array del mazzo intero */
@@ -61,11 +61,12 @@ var createHand = (cards) =>{
     var i = 0;
     var hand =[];
     var x = Math.round((Math.random()*leng)+1);
-    while (((i<=4)&&(hand.includes(cards[x])===false))&&(cards[x]!=="")){
-        hand[i] = cards[x];
-        cards[x]="";
-        i = i+1;
-        x = Math.round((Math.random()*leng)+1);
+   for(i=0;i<=4;i++){
+       if ((hand.includes(cards[x])==false)&&(cards[x]!=="")&&(cards[x]!==undefined)){
+            hand[i] = cards[x];
+            cards[x]="";
+            x = Math.round((Math.random()*leng)+1);
+       } else i = i-1;
     }
     return hand;
 
