@@ -45,13 +45,13 @@ var createHand = (cards) =>{
     var i = 0;
     var hand =[];
     var x = Math.round((Math.random()*leng)+1);
-   for(i=0;i<=4;i++){
+   while(i<=4){
        if ((hand.includes(cards[x])==false)&&(cards[x]!=="")&&(cards[x]!==undefined)){
             hand[i] = cards[x];
             cards[x]="";
             x = Math.round((Math.random()*leng)+1);
-       }else continue;
-        
+            i++;
+       }   
    }
    return hand;
 }
