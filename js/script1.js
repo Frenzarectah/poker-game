@@ -31,8 +31,8 @@ var sendData = () =>{
 var createGame = (data) =>{
     var result = [];
     k = 0;
-    var n_players = data[1];
-    for(k=0;k<=n_players-1;k++){
+    var n_players = data[1]-1;
+    for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);
         console.log("molto bene "+result[k]);
     }
@@ -41,15 +41,14 @@ var createGame = (data) =>{
 
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
 var createHand = (cards) =>{
-    leng = cards.length;
+    leng = cards.length-1;
     var i = 0;
     var hand =[];
-    var x = Math.round((Math.random()*leng)+1);
+    var x = Math.round(Math.random()*leng);
    while(i<=4){
-       if ((hand.includes(cards[x])==false)&&(cards[x]!=="")&&(cards[x]!==undefined)){
+       if (hand.includes(cards[x])==false){
             hand[i] = cards[x];
-            cards[x]="";
-            x = Math.round((Math.random()*leng)+1);
+            x = Math.round(Math.random()*leng);
             i++;
        }   
    }
