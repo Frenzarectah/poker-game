@@ -1,4 +1,4 @@
-const num = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
 const seeds =["C","D","S","H"];
  //creazione tramite funzione del mazzo completo
  var createDeck = () =>{
@@ -54,9 +54,53 @@ var createHand = (cards) =>{
    }
    return hand;
 }
+//funzione che calcola il punteggio in base alle regole del poker 5 carte
+var score_calc = (fiveCard) =>{
+    var value =[];
+    var seed = [];
+    var c = 0;
+    var d = 0;
+    var s = 0;
+    var h = 0;
+    value[i] = 0;
+    values = 0;
+    fiveCard.sort();
+    for(i=0;i<=4;i++){
+        seed[i] = fiveCard[i].charAt(fiveCard[i].length-1);
+        if (fiveCard[i].length === 3){
+                value[i] = parseInt(fiveCard[i].substr(0,2));
+                values = values + value[i];
+            }
+        else { 
+            value[i] = parseInt(fiveCard[i].substr(0,1));
+            values = values + value[i];
+        };
+        switch(seed[i]){
+            case "C": 
+                c=c+1;
+                break;
+            case "H": 
+                h=h+1;
+                break;
+            case "D": 
+                d=d+1; 
+                break;
+            case "S": 
+                s=s+1; 
+                break;
+            }
+    }
+    switch(c){
+            case 1: console.log("una sola c mazzo!"+fiveCard);break;
+            case 2: console.log("due c in un mazzo!"+fiveCard);break; 
+            case 3: console.log("tre c in un mazzo!"+fiveCard);break;
+            case 4: console.log("quattro c in un mazzo!"+fiveCard);break;
+            case 5: console.log("COLORE!"+fiveCard);break;
+        }
+        return "diocancaro!";
+}
 
-
-//funzione unicamente per aprire dorm di immissione dati
+//funzione unicamente per aprire form di immissione dati
 
 var openMenu = () =>{
     var btn_start = document.querySelector(".ace");
@@ -66,5 +110,7 @@ var openMenu = () =>{
     form.style.display = "flex";
 }
 
+x = score_calc(createHand(deck));
+console.log(x);
 
 module.exports = {createDeck,createHand};
