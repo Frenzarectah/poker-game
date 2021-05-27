@@ -45,9 +45,10 @@ var createHand = (cards) =>{
     var i = 0;
     var hand =[];
     var x = Math.round(Math.random()*leng);
-   while(i<=4){
+   while((i<=4)&&(cards[x]!==undefined)){
        if (hand.includes(cards[x])==false){
             hand[i] = cards[x];
+            //delete(cards[x]);
             x = Math.round(Math.random()*leng);
             i++;
        }   
@@ -58,46 +59,29 @@ var createHand = (cards) =>{
 var score_calc = (fiveCard) =>{
     var value =[];
     var seed = [];
-    var c = 0;
-    var d = 0;
-    var s = 0;
-    var h = 0;
-    value[i] = 0;
+    var c = 0; h = 0;d = 0;s = 0;
     values = 0;
-    fiveCard.sort();
     for(i=0;i<=4;i++){
+        //fiveCard = fiveCard.sort(function(a, b){return b - a});
         seed[i] = fiveCard[i].charAt(fiveCard[i].length-1);
         if (fiveCard[i].length === 3){
-                value[i] = parseInt(fiveCard[i].substr(0,2));
+                value[i] = fiveCard[i].substr(0,2);
                 values = values + value[i];
             }
-        else { 
-            value[i] = parseInt(fiveCard[i].substr(0,1));
+        else if (fiveCard[i].length === 2){ 
+            value[i] = fiveCard[i].substr(0,1);
             values = values + value[i];
         };
-        switch(seed[i]){
-            case "C": 
-                c=c+1;
-                break;
-            case "H": 
-                h=h+1;
-                break;
-            case "D": 
-                d=d+1; 
-                break;
-            case "S": 
-                s=s+1; 
-                break;
-            }
+
     }
-    switch(c){
-            case 1: console.log("una sola c mazzo!"+fiveCard);break;
-            case 2: console.log("due c in un mazzo!"+fiveCard);break; 
-            case 3: console.log("tre c in un mazzo!"+fiveCard);break;
-            case 4: console.log("quattro c in un mazzo!"+fiveCard);break;
-            case 5: console.log("COLORE!"+fiveCard);break;
-        }
-        return "diocancaro!";
+    for(i=0;i<=4;i++){              
+        if (seed[i]==="C") c++;
+        else if (seed[i]==="D") d++;
+        else if (seed[i]==="H") h++;
+        else s++;
+    }
+
+    console.log(c,d,h,s);
 }
 
 //funzione unicamente per aprire form di immissione dati
