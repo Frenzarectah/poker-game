@@ -1,5 +1,6 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
 const seeds =["C","D","S","H"];
+//const seeds =[0,1,2,3];
  //creazione tramite funzione del mazzo completo
  var createDeck = () =>{
     var deck =[];
@@ -33,8 +34,8 @@ var createGame = (data) =>{
     k = 0;
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
-        result[k] = createHand(deck);
-        console.log("molto bene "+result[k]);
+        result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
+        console.log("molto bene "+result[k]);  
     }
     return result;
 }
@@ -80,10 +81,18 @@ var score_calc = (fiveCard) =>{
         else if (seed[i]==="H") h++;
         else s++;
     }
-
-    console.log(c,d,h,s);
+    if (c===3)  checkFlush(value,c);
+    if (d===3)  checkFlush(value,d);
+    if (h===3)  checkFlush(value,h);
+    else if(s===3) checkFlush(value,s);
+    else console.log(c,d,h,s);
+    return value;
 }
 
+var checkFlush = (valuesis,seed) =>{
+    valuesis.sort();
+    
+};
 //funzione unicamente per aprire form di immissione dati
 
 var openMenu = () =>{
