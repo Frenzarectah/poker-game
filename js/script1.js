@@ -1,7 +1,25 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
 const seeds =["C","D","S","H"];
-//const seeds =[0,1,2,3];
- //creazione tramite funzione del mazzo completo
+
+//sum calcola la somma dei punti della mano
+var sum = (array)=> {
+    var tot = 0;
+    for(i=0;i<array.length;i++) {
+        tot += parseInt(array[i]);
+    }
+return tot;
+};
+
+var consec = (array) =>{
+    var n_cnsec = 0;
+    for(i=0;i<array.length;i++){
+        if(array[i]===array[i+1]) n_consec++;       
+    }
+    if (n_consec === 5) return true;
+}
+
+
+//creazione tramite funzione del mazzo completo
  var createDeck = () =>{
     var deck =[];
     for(y=0;y<=seeds.length-1;y++){
@@ -85,13 +103,16 @@ var score_calc = (fiveCard) =>{
     if (d===3)  checkFlush(value,d);
     if (h===3)  checkFlush(value,h);
     else if(s===3) checkFlush(value,s);
-    else console.log(c,d,h,s);
+    //else console.log(c,d,h,s);
     return value;
 }
 
 var checkFlush = (valuesis,seed) =>{
     valuesis.sort();
-    
+    totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano
+    if (totPoint === 60) console.log("scala reale!");
+    else if (consec(valuesis)=== true) console.log("scala!");
+    else console.log("colore!");
 };
 //funzione unicamente per aprire form di immissione dati
 
