@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","D","S","H"];
+const seeds =["C","C","C","C"];
 
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
@@ -9,13 +9,16 @@ var sum = (array)=> {
     }
 return tot;
 };
-
+//calcola se mazzo è fatto da tutti valori consecutivi
 var consec = (array) =>{
-    var n_cnsec = 0;
-    for(i=0;i<array.length;i++){
-        if(array[i]===array[i+1]) n_consec++;       
-    }
-    if (n_consec === 5) return true;
+    var n_consec = 1;
+    array.sort(function(a, b){return b - a});
+  //5,4,3,2,1
+  for (i=0;i<array.length;i++){
+    if(array[i]==array[i+1]+1) n_consec +=1;
+  }
+  if (n_consec == 5) return true;
+  else return array;
 }
 
 
@@ -99,10 +102,10 @@ var score_calc = (fiveCard) =>{
         else if (seed[i]==="H") h++;
         else s++;
     }
-    if (c===3)  checkFlush(value,c);
-    if (d===3)  checkFlush(value,d);
-    if (h===3)  checkFlush(value,h);
-    else if(s===3) checkFlush(value,s);
+    if (c===5)  checkFlush(value,c);
+    if (d===5)  checkFlush(value,d);
+    if (h===5)  checkFlush(value,h);
+    else if(s===5) checkFlush(value,s);
     //else console.log(c,d,h,s);
     return value;
 }
