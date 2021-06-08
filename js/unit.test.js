@@ -4,7 +4,7 @@ const funct = require('./script1');
 test("function which creates the 52 card deck",()=>{
     array1 = [1,2,3,4,5,6,7,8,9,10,11,12,13];
     array2 = ["C","D","S","H"];
-    expect(funct.createDeck()).toContain('1C');
+    expect(funct.createDeck()).toContain('2C');
 });
 
 test("function which creates a 5-card-hand from a complete deck",()=>{

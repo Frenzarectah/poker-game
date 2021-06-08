@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","C","C","C"];
+const seeds =["C","S","H","D"];
 
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
@@ -62,20 +62,17 @@ var createGame = (data) =>{
 }
 
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
-var createHand = (cards) =>{
-    leng = cards.length-1;
-    var i = 0;
-    var hand =[];
-    var x = Math.round(Math.random()*leng);
-   while((i<=4)&&(cards[x]!==undefined)){
-       if (hand.includes(cards[x])==false){
-            hand[i] = cards[x];
-            //delete(cards[x]);
-            x = Math.round(Math.random()*leng);
-            i++;
-       }   
-   }
-   return hand;
+var createHand = (cards)=>{
+    var i = 0; x = 0; leng = 0;
+    var hand = [];
+    while(i<=4){
+        leng = cards.length-1;
+        x = Math.round(Math.random()*leng);
+        hand[i] = cards[x];
+        cards.splice(x,1);
+        i++;
+    }
+    return hand;
 }
 //funzione che calcola il punteggio in base alle regole del poker 5 carte
 var score_calc = (fiveCard) =>{
