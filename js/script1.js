@@ -49,17 +49,15 @@ var sendData = () =>{
         return form;
     }
 }
-//creazione della funzione di gioco, prende dati del form e mazzo,crea randomicamente carte e distribuisce
+//creazione della funzione di gioco, distribuisce le 5 carte a ciascuno dei giocatori
 var createGame = (data) =>{
     var result = [];
     k = 0;
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
-        //console.log("molto bene "+result[k]);
         console.log(score_calc(result[k]));  
     }
-    //return 
 }
 
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
