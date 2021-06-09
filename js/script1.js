@@ -98,11 +98,22 @@ var score_calc = (fiveCard) =>{
         else if (seed[i]==="H") h++;
         else s++;
     }
-    if (c===5)  checkFlush(value,c);
-    if (d===5)  checkFlush(value,d);
-    if (h===5)  checkFlush(value,h);
-    else if(s===5) checkFlush(value,s);
-    //else console.log(c,d,h,s);
+    switch (c){
+        case 5: checkFlush(value,c);
+        case 4,3,2,1: checkNoflush(value,c);
+    }
+    switch (d){
+        case 5: checkFlush(value,d);
+        case 4,3,2,1: checkNoflush(value,d);
+    }
+    switch (h){
+        case 5: checkFlush(value,h);
+        case 4,3,2,1: checkNoflush(value,h);
+    }
+    switch (s){
+        case 5: checkFlush(value,s);
+        case 4,3,2,1: checkNoflush(value,s);
+    }
     return value;
 }
 
@@ -113,6 +124,9 @@ var checkFlush = (valuesis,seed) =>{
     else if (consec(valuesis)=== true) console.log("scala!");
     else console.log("colore!");
 };
+var checkNoflush = (valuesis,seed) =>{
+    console.log("non sono 5 semi uguali attaccati al cazzo!");
+}
 //funzione unicamente per aprire form di immissione dati
 
 var openMenu = () =>{
@@ -123,7 +137,7 @@ var openMenu = () =>{
     form.style.display = "flex";
 }
 
-x = score_calc(createHand(deck));
-console.log(x);
+//x = score_calc(createHand(deck));
+//console.log(x);
 
 module.exports = {createDeck,createHand};
