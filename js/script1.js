@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","C","C","C"];
+const seeds =["C","H","S","D"];
 
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
@@ -45,7 +45,7 @@ var sendData = () =>{
         return false;
     }
     else{
-        console.log(createGame(form)); 
+        createGame(form); 
         return form;
     }
 }
@@ -98,22 +98,9 @@ var score_calc = (fiveCard) =>{
         else if (seed[i]==="H") h++;
         else s++;
     }
-    switch (c){
-        case 5: checkFlush(value,c);
-        case 4,3,2,1: checkNoflush(value,c);
-    }
-    switch (d){
-        case 5: checkFlush(value,d);
-        case 4,3,2,1: checkNoflush(value,d);
-    }
-    switch (h){
-        case 5: checkFlush(value,h);
-        case 4,3,2,1: checkNoflush(value,h);
-    }
-    switch (s){
-        case 5: checkFlush(value,s);
-        case 4,3,2,1: checkNoflush(value,s);
-    }
+    if((c===5)||(d===5)||(h===5)||(s===5)) checkFlush(value,c);
+        else checkNoflush(fiveCard,seed);
+    
     return value;
 }
 
@@ -125,7 +112,9 @@ var checkFlush = (valuesis,seed) =>{
     else console.log("colore!");
 };
 var checkNoflush = (valuesis,seed) =>{
-    console.log("non sono 5 semi uguali attaccati al cazzo!");
+    var c=0;h=0;s=0;d=0;
+    console.log("carte:"+cards+" seed:"+seed);
+
 }
 //funzione unicamente per aprire form di immissione dati
 
