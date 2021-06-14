@@ -108,12 +108,14 @@ var checkFlush = (valuesis,seed) =>{
     valuesis.sort();
     totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano
     if (totPoint === 60) console.log("scala reale!");
-    else if (consec(valuesis)=== true) console.log("scala!");
+    else if (consec(valuesis)=== true) console.log("scala colore!");
     else console.log("colore!");
 };
 var checkNoflush = (valuesis,seed) =>{
-    var c=0;h=0;s=0;d=0;
-    console.log("carte:"+cards+" seed:"+seed);
+    var same = 0;
+    console.log("carte:"+valuesis+" seed:"+seed);
+    if (consec(valuesis)===true) console.log("scala!");
+    else console.log("non è una scala!");
 
 }
 //funzione unicamente per aprire form di immissione dati
