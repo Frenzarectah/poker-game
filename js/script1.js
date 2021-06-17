@@ -1,6 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","H","S","D"];
-
+const seeds =["C","D","H","S"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -9,13 +8,13 @@ var sum = (array)=> {
     }
 return tot;
 };
-//calcola se mazzo è fatto da tutti valori consecutivi
+//calcola se mano è fatta da tutti valori consecutivi
 var consec = (array) =>{
     var n_consec = 1;
     array.sort(function(a, b){return b - a});
   //5,4,3,2,1
   for (i=0;i<array.length;i++){
-    if(array[i]==array[i+1]+1) n_consec +=1;
+    if((array[i] - array[i+1])==1) n_consec++;
   }
   if (n_consec == 5) return true;
   else return array;
@@ -112,6 +111,7 @@ var checkFlush = (valuesis,seed) =>{
     else console.log("colore!");
 };
 var checkNoflush = (valuesis,seed) =>{
+    valuesis.sort();
     var same = 0;
     console.log("carte:"+valuesis+" seed:"+seed);
     if (consec(valuesis)===true) console.log("scala!");
@@ -130,5 +130,7 @@ var openMenu = () =>{
 
 //x = score_calc(createHand(deck));
 //console.log(x);
+//var arreifinto = ["14","12","13","11","10"];
+//console.log(consec(arreifinto));
 
 module.exports = {createDeck,createHand};
