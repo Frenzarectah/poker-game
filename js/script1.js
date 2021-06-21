@@ -98,7 +98,7 @@ var score_calc = (fiveCard) =>{
         else s++;
     }
     if((c===5)||(d===5)||(h===5)||(s===5)) checkFlush(value,c);
-        else checkNoflush(fiveCard,seed);
+        else checkNoflush(value,seed);
     
     return value;
 }
@@ -112,11 +112,23 @@ var checkFlush = (valuesis,seed) =>{
 };
 var checkNoflush = (valuesis,seed) =>{
     valuesis.sort();
-    var same = 0;
+    var same = [];
+    cont=1;j=0;
     console.log("carte:"+valuesis+" seed:"+seed);
     if (consec(valuesis)===true) console.log("scala!");
     else console.log("non è una scala!");
-
+    //11,11,14,14,14
+    for(i=0;i<valuesis.length;i++){    //aggiunta di sto accrocchio per capire che morte fare
+        if(valuesis[i]===valuesis[i+1]){
+            cont++;
+            same[j]=cont;
+        }else{
+            j++;
+            cont=1;
+        }  
+    };
+    console.log(same);
+    
 }
 //funzione unicamente per aprire form di immissione dati
 
@@ -130,7 +142,7 @@ var openMenu = () =>{
 
 //x = score_calc(createHand(deck));
 //console.log(x);
-//var arreifinto = ["14","12","13","11","10"];
-//console.log(consec(arreifinto));
+arreifinto = ["14","14","14","14","11"];
+checkNoflush(arreifinto,"c");
 
 module.exports = {createDeck,createHand};
