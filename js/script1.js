@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","D","H","S"];
+const seeds =["C","S","H","D"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -116,7 +116,6 @@ var checkNoflush = (valuesis,seed) =>{
     cont=1;j=0;
     console.log("carte:"+valuesis+" seed:"+seed);
     if (consec(valuesis)===true) console.log("scala!");
-    else console.log("non è una scala!");
     //11,11,14,14,14
     for(i=0;i<valuesis.length;i++){    
         if(valuesis[i]===valuesis[i+1]){
@@ -127,8 +126,21 @@ var checkNoflush = (valuesis,seed) =>{
             cont=1;
         }  
     };
-    console.log(same);
-    
+    same = same.filter(()=>(el)=>{return el!==""}); //filtra gli elementi vuoti dell'array
+    occurrCalc(same);
+}
+
+var occurrCalc = (numOcc) =>{
+    //[2,3]
+    for(i=0;i<=numOcc.length-1;i++){
+        switch (numOcc[i]){
+            case 2:{ if (numOcc[i]===numOcc[i+1]){ console.log("doppia coppia!");}
+                     else console.log("coppia");break;
+        }
+            case 3: console.log("tris");break;
+            case 4: console.log("poker");break;
+        }
+    }
 }
 //funzione unicamente per aprire form di immissione dati
 
@@ -140,9 +152,7 @@ var openMenu = () =>{
     form.style.display = "flex";
 }
 
-//x = score_calc(createHand(deck));
-//console.log(x);
-arreifinto = ["11","11","11","14","14"];
-checkNoflush(arreifinto,"c");
-
+/*var occ = [2,3];
+occurrCalc(occ);
+*/
 module.exports = {createDeck,createHand};
