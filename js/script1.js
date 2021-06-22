@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","S","H","D"];
+const seeds =["C","C","C","C"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -34,7 +34,6 @@ var consec = (array) =>{
       else return false;
 }
 var deck = createDeck();  // creazione di variabile "deck" per conservare mazzo completo
-
 var sendData = () =>{
     var form = [];
     form[0] = document.querySelector(".name").value;
@@ -44,7 +43,7 @@ var sendData = () =>{
         return false;
     }
     else{
-        createGame(form); 
+        createGame(form);
         return form;
     }
 }
@@ -55,7 +54,8 @@ var createGame = (data) =>{
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
-        console.log(score_calc(result[k]));  
+        console.log(result[k]);
+        score_calc(result[k]);  
     }
 }
 
@@ -97,25 +97,37 @@ var score_calc = (fiveCard) =>{
         else if (seed[i]==="H") h++;
         else s++;
     }
-    if((c===5)||(d===5)||(h===5)||(s===5)) checkFlush(value,c);
-        else checkNoflush(value,seed);
+    if((c===5)||(d===5)||(h===5)||(s===5)) checkFlush(fiveCard,value,c);
+        else checkNoflush(fiveCard,value,seed);
     
-    return value;
+    return fiveCard,value;
 }
 
-var checkFlush = (valuesis,seed) =>{
+var checkFlush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
     totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano
-    if (totPoint === 60) console.log("scala reale!");
-    else if (consec(valuesis)=== true) console.log("scala colore!");
-    else console.log("colore!");
+    if (totPoint === 60){ 
+        console.log("scala reale!");
+        score = 10;
+    }
+    else if (consec(valuesis)=== true){ 
+        console.log("scala colore!");
+        score = 9;
+    }
+    else{ console.log("colore!");
+        score = 6;
+    }
+    console.log(fiveC,score);
 };
-var checkNoflush = (valuesis,seed) =>{
+var checkNoflush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
     var same = [];
     cont=1;j=0;
     console.log("carte:"+valuesis+" seed:"+seed);
-    if (consec(valuesis)===true) console.log("scala!");
+    if (consec(valuesis)===true){ 
+        console.log("scala!");
+        score = 5;
+    }
     //11,11,14,14,14
     for(i=0;i<valuesis.length;i++){    
         if(valuesis[i]===valuesis[i+1]){
@@ -127,20 +139,44 @@ var checkNoflush = (valuesis,seed) =>{
         }  
     };
     same = same.filter(()=>(el)=>{return el!==""}); //filtra gli elementi vuoti dell'array
-    occurrCalc(same);
+    if (same.length!==0) occurrCalc(fiveC,same);
+    else{ 
+        console.log(valuesis[0]);
+        score = 1;
+    }
+    console.log(fiveC,score);
 }
 
-var occurrCalc = (numOcc) =>{
+var occurrCalc = (fiveCard,numOcc) =>{
     //[2,3]
     for(i=0;i<=numOcc.length-1;i++){
         switch (numOcc[i]){
-            case 2:{ if (numOcc[i]===numOcc[i+1]){ console.log("doppia coppia!");}
-                     else console.log("coppia");break;
+            case 2:{ if (numOcc[i]===numOcc[i+1]){ 
+                console.log("doppia coppia!");
+                score = 3;break;
+            }
+            else if ((numOcc[i] === 2)&&(numOcc.length===1)){ 
+                console.log("coppia");
+                score = 2;break;
+            }
         }
-            case 3: console.log("tris");break;
-            case 4: console.log("poker");break;
+            case 3:{
+                if (numOcc[i]>numOcc[i+1]){ 
+                    console.log("full");
+                    score = 7;break;
+                }
+                else{ 
+                    console.log("tris");
+                    score = 4;break;
+                }
+            }
+            case 4:{ 
+                console.log("poker");
+                score = 8;break;
+            }
         }
     }
+    console.log(fiveCard,score);
 }
 //funzione unicamente per aprire form di immissione dati
 
@@ -152,7 +188,7 @@ var openMenu = () =>{
     form.style.display = "flex";
 }
 
-/*var occ = [2,3];
-occurrCalc(occ);
-*/
+//var occ = [3];
+//occurrCalc(occ);
+
 module.exports = {createDeck,createHand};
