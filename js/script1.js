@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","C","C","C"];
+const seeds =["C","D","H","S"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -117,7 +117,7 @@ var checkFlush = (fiveC,valuesis,seed) =>{
     else{ console.log("colore!");
         score = 6;
     }
-    console.log(fiveC,score);
+    console.log(fiveC,score); //dato importantissimo hand + score di tale hand
 };
 var checkNoflush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
@@ -144,7 +144,7 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
         console.log(valuesis[0]);
         score = 1;
     }
-    console.log(fiveC,score);
+    return fiveC,score;
 }
 
 var occurrCalc = (fiveCard,numOcc) =>{
@@ -176,7 +176,7 @@ var occurrCalc = (fiveCard,numOcc) =>{
             }
         }
     }
-    console.log(fiveCard,score);
+    console.log(fiveCard,score); //dato importantissimo fivecard + score
 }
 //funzione unicamente per aprire form di immissione dati
 
