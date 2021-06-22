@@ -118,7 +118,7 @@ var checkNoflush = (valuesis,seed) =>{
     if (consec(valuesis)===true) console.log("scala!");
     else console.log("non è una scala!");
     //11,11,14,14,14
-    for(i=0;i<valuesis.length;i++){    //aggiunta di sto accrocchio per capire che morte fare
+    for(i=0;i<valuesis.length;i++){    
         if(valuesis[i]===valuesis[i+1]){
             cont++;
             same[j]=cont;
@@ -142,7 +142,7 @@ var openMenu = () =>{
 
 //x = score_calc(createHand(deck));
 //console.log(x);
-arreifinto = ["14","14","14","14","11"];
+arreifinto = ["11","11","11","14","14"];
 checkNoflush(arreifinto,"c");
 
 module.exports = {createDeck,createHand};
