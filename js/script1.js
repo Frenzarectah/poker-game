@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","H","S","D"];
+const seeds =["C","C","C","C"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -50,6 +50,7 @@ var sendData = () =>{
 //creazione della funzione di gioco, distribuisce le 5 carte a ciascuno dei giocatori
 var createGame = (data) =>{
     var result = [];
+    var points = [];
     k = 0;
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
@@ -118,7 +119,7 @@ var checkFlush = (fiveC,valuesis,seed) =>{
         score = 19;
     }
     output = merging(fiveC,score);
-    console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)
+    console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)EVVIVA!
 };
 var checkNoflush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
@@ -146,40 +147,17 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
         score = valuesis[0];
     }
     output = merging(fiveC,score);
-    console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)
+    console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)EVVIVA!
 }
 
 var occurrCalc = (fiveCard,numOcc) =>{
     //[2,3]
-    for(i=0;i<=numOcc.length-1;i++){
-        switch (numOcc[i]){
-            case 2:{ if (numOcc[i]===numOcc[i+1]){ 
-                console.log("doppia coppia!");
-                score = 16;break;
-            }
-            else if ((numOcc[i] === 2)&&(numOcc.length===1)){ 
-                console.log("coppia");
-                score = 15;break;
-            }
-        }
-            case 3:{
-                if (numOcc[i]>numOcc[i+1]){ 
-                    console.log("full");
-                    score = 20;break;
-                }
-                else{ 
-                    console.log("tris");
-                    score = 17;break;
-                }
-            }
-            case 4:{ 
-                console.log("poker");
-                score = 21;break;
-            }
-        }
-    }
-    output = merging(fiveCard,score);
-    return output; //dato importantissimo fivecard + score (non ordinato, puro)
+        if((numOcc[0]=== 2)&&(numOcc[1]=== 2)) score=16;
+        else if ((numOcc[0]=== 2)&&(numOcc.length==1)) score=15;
+        else if ((numOcc[0])=== 4) score =21;
+        else if ((numOcc[0])===3) score = 17;
+        else score =20;
+    return fiveCard,score; //dato importantissimo fivecard + score (non ordinato, puro)
 }
 //funzione unicamente per aprire form di immissione dati
 
@@ -195,7 +173,8 @@ var merging = (fiveC,points) =>{ //aggiunge all'ultima posizione lo score del ma
 fiveC.push(points);
 return fiveC;
 };
-var arreifinto = ["12H","12H","11C","11C","4D"];
+
+var arreifinto = ["12C","12C","11C","12C","4C"];
 console.log(score_calc(arreifinto));
 
 module.exports = {createDeck,createHand};
