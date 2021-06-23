@@ -55,9 +55,11 @@ var createGame = (data) =>{
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
-        console.log(result[k]);
-        console.log(score_calc(result[k]));  
+        //console.log(result[k]);
+        //console.log(score_calc(result[k]));
+        points[k] = score_calc(result[k]);  
     }
+    console.log("i points sono:"+points[0]);
 }
 
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
@@ -98,10 +100,10 @@ var score_calc = (fiveCard) =>{
         else if (seed[i]==="H") h++;
         else s++;
     }
-    if((c===5)||(d===5)||(h===5)||(s===5)) checkFlush(fiveCard,value,c);
-        else checkNoflush(fiveCard,value,seed);
+    if((c===5)||(d===5)||(h===5)||(s===5)) return checkFlush(fiveCard,value,c);
+        else  return checkNoflush(fiveCard,value,seed);
     //console.log(fiveCard,value);
-    return fiveCard,value;
+    //return fiveCard,value;
 }
 
 var checkFlush = (fiveC,valuesis,seed) =>{
@@ -119,7 +121,8 @@ var checkFlush = (fiveC,valuesis,seed) =>{
         score = 19;
     }
     output = merging(fiveC,score);
-    console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)EVVIVA!
+    //console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)EVVIVA!
+    return output;
 };
 var checkNoflush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
@@ -148,6 +151,7 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
     }
     output = merging(fiveC,score);
     console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)EVVIVA!
+    return output;
 }
 
 var occurrCalc = (fiveCard,numOcc) =>{
