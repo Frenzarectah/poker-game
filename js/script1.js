@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","D","H","S"];
+const seeds =["C","H","S","D"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -55,7 +55,7 @@ var createGame = (data) =>{
     for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
         console.log(result[k]);
-        score_calc(result[k]);  
+        console.log(score_calc(result[k]));  
     }
 }
 
@@ -99,7 +99,7 @@ var score_calc = (fiveCard) =>{
     }
     if((c===5)||(d===5)||(h===5)||(s===5)) checkFlush(fiveCard,value,c);
         else checkNoflush(fiveCard,value,seed);
-    
+    //console.log(fiveCard,value);
     return fiveCard,value;
 }
 
@@ -117,7 +117,8 @@ var checkFlush = (fiveC,valuesis,seed) =>{
     else{ console.log("colore!");
         score = 19;
     }
-    console.log(fiveC,score); //dato importantissimo hand + score di tale hand
+    output = merging(fiveC,score);
+    console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)
 };
 var checkNoflush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
@@ -144,7 +145,8 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
         console.log(valuesis[0]);
         score = valuesis[0];
     }
-    console.log(fiveC,score); //ritorno di mazzo con suo score
+    output = merging(fiveC,score);
+    console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)
 }
 
 var occurrCalc = (fiveCard,numOcc) =>{
@@ -176,7 +178,8 @@ var occurrCalc = (fiveCard,numOcc) =>{
             }
         }
     }
-    console.log(fiveCard,score); //dato importantissimo fivecard + score
+    output = merging(fiveCard,score);
+    return output; //dato importantissimo fivecard + score (non ordinato, puro)
 }
 //funzione unicamente per aprire form di immissione dati
 
@@ -188,7 +191,11 @@ var openMenu = () =>{
     form.style.display = "flex";
 }
 
-//var occ = [3];
-//occurrCalc(occ);
+var merging = (fiveC,points) =>{ //aggiunge all'ultima posizione lo score del mazzo
+fiveC.push(points);
+return fiveC;
+};
+var arreifinto = ["12H","12H","11C","11C","4D"];
+console.log(score_calc(arreifinto));
 
 module.exports = {createDeck,createHand};
