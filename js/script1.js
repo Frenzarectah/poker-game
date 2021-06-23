@@ -108,14 +108,14 @@ var checkFlush = (fiveC,valuesis,seed) =>{
     totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano
     if (totPoint === 60){ 
         console.log("scala reale!");
-        score = 10;
+        score = 23;
     }
     else if (consec(valuesis)=== true){ 
         console.log("scala colore!");
-        score = 9;
+        score = 22;
     }
     else{ console.log("colore!");
-        score = 6;
+        score = 19;
     }
     console.log(fiveC,score); //dato importantissimo hand + score di tale hand
 };
@@ -126,7 +126,7 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
     console.log("carte:"+valuesis+" seed:"+seed);
     if (consec(valuesis)===true){ 
         console.log("scala!");
-        score = 5;
+        score = 18;
     }
     //11,11,14,14,14
     for(i=0;i<valuesis.length;i++){    
@@ -142,9 +142,9 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
     if (same.length!==0) occurrCalc(fiveC,same);
     else{ 
         console.log(valuesis[0]);
-        score = 1;
+        score = valuesis[0];
     }
-    return fiveC,score;
+    console.log(fiveC,score); //ritorno di mazzo con suo score
 }
 
 var occurrCalc = (fiveCard,numOcc) =>{
@@ -153,26 +153,26 @@ var occurrCalc = (fiveCard,numOcc) =>{
         switch (numOcc[i]){
             case 2:{ if (numOcc[i]===numOcc[i+1]){ 
                 console.log("doppia coppia!");
-                score = 3;break;
+                score = 16;break;
             }
             else if ((numOcc[i] === 2)&&(numOcc.length===1)){ 
                 console.log("coppia");
-                score = 2;break;
+                score = 15;break;
             }
         }
             case 3:{
                 if (numOcc[i]>numOcc[i+1]){ 
                     console.log("full");
-                    score = 7;break;
+                    score = 20;break;
                 }
                 else{ 
                     console.log("tris");
-                    score = 4;break;
+                    score = 17;break;
                 }
             }
             case 4:{ 
                 console.log("poker");
-                score = 8;break;
+                score = 21;break;
             }
         }
     }
