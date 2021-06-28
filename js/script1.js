@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","C","C","C"];
+const seeds =["C","D","S","H"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -59,7 +59,23 @@ var createGame = (data) =>{
         //console.log(score_calc(result[k]));
         points[k] = score_calc(result[k]);  
     }
-    console.log("i points sono:"+points[0]);
+    //console.log("i points sono:"+points[0]);  //12C,2C,3H,7D,2D,13
+    scoring(points);
+}
+//funzione per restituire la mano con punteggio piu alto
+var scoring = (handscore) =>{
+    var handpoint = [];
+    var max = 0;idx=0;
+
+    for (i=0;i<=handscore.length-1;i++) handpoint.push(handscore[i]);
+    for(k=0;k<=handpoint.length-1;k++){
+        if (handpoint[k][5]>max){
+            max = handpoint[k][5];
+            idx = k;
+        }
+    }
+    winner = handpoint[idx];
+    console.log("la mano vincente è"+winner);
 }
 
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
@@ -178,7 +194,20 @@ fiveC.push(points);
 return fiveC;
 };
 
-var arreifinto = ["12C","12C","11C","12C","4C"];
-console.log(score_calc(arreifinto));
+//var arreifinto = ["12C","12C","11C","12C","4C"];
+//console.log(score_calc(arreifinto));
 
 module.exports = {createDeck,createHand};
+
+/*switch(handpoint[k][5]){
+            case 23: console.log(handpoint[k]+"è la mano vincente con scala reale!");break;
+            case 22: console.log(handpoint[k]+"è la mano vincente con scala a colore!");break;
+            case 21: console.log(handpoint[k]+"è la mano vincente con poker!");break;
+            case 20: console.log(handpoint[k]+"è la mano vincente con full!");break;
+            case 19: console.log(handpoint[k]+"è la mano vincente con colore!");break;
+            case 18: console.log(handpoint[k]+"è la mano vincente con scala!");break;
+            case 17: console.log(handpoint[k]+"è la mano vincente con tris");break;
+            case 16: console.log(handpoint[k]+"è la mano vincente con doppia coppia");break;
+            case 15: console.log(handpoint[k]+"è la mano vincente con coppia!");break;
+            default: console.log(handpoint[k]+"è la mano vincente con carta alta");
+                };*/
