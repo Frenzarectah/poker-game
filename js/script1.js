@@ -74,8 +74,16 @@ var scoring = (handscore) =>{
             idx = k;
         }
     }
-    winner = handpoint[idx];
-    console.log("la mano vincente è"+winner);
+    return idx,handpoint;
+}
+
+//funzione per renderizzare i risultati a video
+var render = (index,handz) =>{
+    var img = document.getElementsByClassName('.cards');
+    console.log(img);
+    /*for (i=0;i<=handz.length-1;i++){
+        image=+handz[index][i];
+}*/
 }
 
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
@@ -118,8 +126,6 @@ var score_calc = (fiveCard) =>{
     }
     if((c===5)||(d===5)||(h===5)||(s===5)) return checkFlush(fiveCard,value,c);
         else  return checkNoflush(fiveCard,value,seed);
-    //console.log(fiveCard,value);
-    //return fiveCard,value;
 }
 
 var checkFlush = (fiveC,valuesis,seed) =>{
@@ -193,21 +199,8 @@ var merging = (fiveC,points) =>{ //aggiunge all'ultima posizione lo score del ma
 fiveC.push(points);
 return fiveC;
 };
-
-//var arreifinto = ["12C","12C","11C","12C","4C"];
-//console.log(score_calc(arreifinto));
+var arreyfinto = [["2C","3H","4S","7H","1B"],["12B","5A","11C","8H","3B"]];
+console.log(render(1,arreyfinto));
 
 module.exports = {createDeck,createHand};
 
-/*switch(handpoint[k][5]){
-            case 23: console.log(handpoint[k]+"è la mano vincente con scala reale!");break;
-            case 22: console.log(handpoint[k]+"è la mano vincente con scala a colore!");break;
-            case 21: console.log(handpoint[k]+"è la mano vincente con poker!");break;
-            case 20: console.log(handpoint[k]+"è la mano vincente con full!");break;
-            case 19: console.log(handpoint[k]+"è la mano vincente con colore!");break;
-            case 18: console.log(handpoint[k]+"è la mano vincente con scala!");break;
-            case 17: console.log(handpoint[k]+"è la mano vincente con tris");break;
-            case 16: console.log(handpoint[k]+"è la mano vincente con doppia coppia");break;
-            case 15: console.log(handpoint[k]+"è la mano vincente con coppia!");break;
-            default: console.log(handpoint[k]+"è la mano vincente con carta alta");
-                };*/
