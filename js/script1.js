@@ -49,6 +49,8 @@ var sendData = () =>{
 }
 //creazione della funzione di gioco, distribuisce le 5 carte a ciascuno dei giocatori
 var createGame = (data) =>{
+    var clear = document.querySelector(".form");
+    clear.style.display="none";
     var result = [];
     var points = [];
     k = 0;
@@ -74,18 +76,31 @@ var scoring = (handscore) =>{
             idx = k;
         }
     }
+    render(idx,handpoint);
     return idx,handpoint;
 }
 
 //funzione per renderizzare i risultati a video
 var render = (index,handz) =>{
-    var img = document.getElementsByClassName('.cards');
-    console.log(img);
-    /*for (i=0;i<=handz.length-1;i++){
-        image=+handz[index][i];
-}*/
+    //handz.length come se contenesse numero giocatori
+    for(j=0;j<=4;j++){
+        for(i=0;i<=4;i++){ 
+            var div = document.getElementsByClassName("player1")[j];
+            var img = document.createElement("img");
+            img.style.width="100%";
+            img.style.height="100%";
+            pattern = "img/cards/";
+            pattern+=handz[j][i];
+            pattern+=".jpg";
+            console.log(pattern);
+            img.src=pattern;
+            div.appendChild(img);
+            pattern="";
+            
+    }
+    
+    }
 }
-
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
 var createHand = (cards)=>{
     var i = 0; x = 0; leng = 0;
@@ -199,8 +214,8 @@ var merging = (fiveC,points) =>{ //aggiunge all'ultima posizione lo score del ma
 fiveC.push(points);
 return fiveC;
 };
-var arreyfinto = [["2C","3H","4S","7H","1B"],["12B","5A","11C","8H","3B"]];
-console.log(render(1,arreyfinto));
+//var arreyfinto = [["2C","3H","4S","7H","1B"],["12B","5A","11C","8H","3B"]];
+//console.log(render(1,arreyfinto));
 
 module.exports = {createDeck,createHand};
 
