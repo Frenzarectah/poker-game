@@ -52,6 +52,27 @@ body{
 select{
     height:70%;
 }
+.player1{
+    width:7%;
+    height:14%;
+    display:flex;
+    flex-direction: row;
+    align-content:center;
+    justify-content: space-around;
+    margin:5px;
+    font-family:'Abril Fatface';
+    font-size: 2em;
+}
+.winner{
+    display:flex;
+    width:100%;
+    font-family:'Abril Fatface';
+    align-items:center;
+    justify-content: center;
+    font-size:2em;
+
+}
+
 @media only screen and (max-width: 600px) {
 .table{
     height:20%;
@@ -61,5 +82,15 @@ select{
 }
 select{
     height:50%;
+}
+.player1{
+    font-size:0.5em;
+}
+.winner{
+    width:90%;
+    font-family:'Abril Fatface';
+    justify-content:center;
+    font-size:0.5em;
+    align-content: center;
 }
 }

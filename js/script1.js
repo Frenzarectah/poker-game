@@ -8,6 +8,22 @@ var sum = (array)=> {
     }
 return tot;
 };
+//funzione di traduzione tra il punteggio numerico e la corrispondente descrizione
+var trad = (num)=>{
+    switch(num){
+        case 15: return "COPPIA";break;
+        case 16: return "DOPPIA COPPIA";break;
+        case 17: return "TRIS";break;
+        case 18: return "SCALA";break;
+        case 19: return "COLORE";break;
+        case 20: return "FULL";break;
+        case 21: return "POKER";break;
+        case 22: return "SCALA A COLORE";break;
+        case 23: return "SCALA REALE!!";break;
+        case 14: return "carta alta all'asso";break;
+        default: return "carta alta";break;
+    }
+}
 //calcola se mano è fatta da tutti valori consecutivi
 var consec = (array) =>{
     var n_consec = 1;
@@ -82,8 +98,9 @@ var scoring = (handscore) =>{
 
 //funzione per renderizzare i risultati a video
 var render = (index,handz) =>{
+    scoreR = [];
     //handz.length come se contenesse numero giocatori
-    for(j=0;j<=4;j++){
+    for(j=0;j<=handz.length-1;j++){
         for(i=0;i<=4;i++){ 
             var div = document.getElementsByClassName("player1")[j];
             var img = document.createElement("img");
@@ -96,10 +113,15 @@ var render = (index,handz) =>{
             img.src=pattern;
             div.appendChild(img);
             pattern="";
+            scoreR = handz[j][5];
             
     }
-    
+    var scoreRender = document.createElement("p");
+    scoreRender.innerText= trad(scoreR);
+    div.appendChild(scoreRender);
     }
+    var winnerDiv = document.querySelector(".winner");
+    winnerDiv.innerHTML="il punteggio più alto è "+trad(handz[index][5]); 
 }
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
 var createHand = (cards)=>{
