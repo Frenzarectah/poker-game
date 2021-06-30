@@ -20,8 +20,8 @@ var trad = (num)=>{
         case 21: return "POKER";break;
         case 22: return "SCALA A COLORE";break;
         case 23: return "SCALA REALE!!";break;
-        case 14: return "carta alta all'asso";break;
-        default: return "carta alta";break;
+        case 14: return "CARTA ALTA ALL'ASSO";break;
+        default: return "CARTA ALTA";break;
     }
 }
 //calcola se mano è fatta da tutti valori consecutivi
@@ -78,10 +78,10 @@ var createGame = (data) =>{
         points[k] = score_calc(result[k]);  
     }
     //console.log("i points sono:"+points[0]);  //12C,2C,3H,7D,2D,13
-    scoring(points);
+    scoring(points,data);
 }
 //funzione per restituire la mano con punteggio piu alto
-var scoring = (handscore) =>{
+var scoring = (handscore,datas) =>{
     var handpoint = [];
     var max = 0;idx=0;
 
@@ -92,13 +92,14 @@ var scoring = (handscore) =>{
             idx = k;
         }
     }
-    render(idx,handpoint);
-    return idx,handpoint;
+    render(idx,handpoint,datas);
+    return idx,handpoint,datas
 }
 
 //funzione per renderizzare i risultati a video
-var render = (index,handz) =>{
+var render = (index,handz,datas) =>{
     scoreR = [];
+    console.log("i dati sono "+datas);
     //handz.length come se contenesse numero giocatori
     for(j=0;j<=handz.length-1;j++){
         for(i=0;i<=4;i++){ 
@@ -239,5 +240,5 @@ return fiveC;
 //var arreyfinto = [["2C","3H","4S","7H","1B"],["12B","5A","11C","8H","3B"]];
 //console.log(render(1,arreyfinto));
 
-module.exports = {createDeck,createHand};
+module.exports = {createDeck,createHand,sum,trad,consec};
 

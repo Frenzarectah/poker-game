@@ -59,9 +59,9 @@ select{
     flex-direction: row;
     align-content:center;
     justify-content: space-around;
-    margin:5px;
+    margin:10px;
     font-family:'Abril Fatface';
-    font-size: 2em;
+    font-size: 1em;
 }
 .winner{
     display:flex;
@@ -87,7 +87,8 @@ select{
     font-size:0.5em;
 }
 .winner{
-    width:90%;
+    margin-top:10px;
+    width:100%;
     font-family:'Abril Fatface';
     justify-content:center;
     font-size:0.5em;
