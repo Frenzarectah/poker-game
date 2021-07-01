@@ -58,7 +58,11 @@ var sendData = () =>{
         alert("tutti i campi obbligatori!");
         return false;
     }
-    else{
+    else{  //svuotare lo schermo per la prossima mano 
+        for(i=0;i<=form[1]-1;i++){
+            var div = document.getElementsByClassName("player1")[i];
+            div.innerHTML="";
+        };
         createGame(form);
         return form;
     }
@@ -73,8 +77,6 @@ var createGame = (data) =>{
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
-        //console.log(result[k]);
-        //console.log(score_calc(result[k]));
         points[k] = score_calc(result[k]);  
     }
     //console.log("i points sono:"+points[0]);  //12C,2C,3H,7D,2D,13
@@ -83,7 +85,7 @@ var createGame = (data) =>{
 //funzione per restituire la mano con punteggio piu alto
 var scoring = (handscore,datas) =>{
     var handpoint = [];
-    var max = 0;idx=0;
+    var max = 0; idx=0;
 
     for (i=0;i<=handscore.length-1;i++) handpoint.push(handscore[i]);
     for(k=0;k<=handpoint.length-1;k++){
