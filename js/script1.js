@@ -35,8 +35,6 @@ var consec = (array) =>{
   if (n_consec == 5) return true;
   else return array;
 }
-
-
 //creazione tramite funzione del mazzo completo
  var createDeck = () =>{
     var deck =[];
@@ -81,50 +79,6 @@ var createGame = (data) =>{
     }
     //console.log("i points sono:"+points[0]);  //12C,2C,3H,7D,2D,13
     scoring(points,data);
-}
-//funzione per restituire la mano con punteggio piu alto
-var scoring = (handscore,datas) =>{
-    var handpoint = [];
-    var max = 0; idx=0;
-
-    for (i=0;i<=handscore.length-1;i++) handpoint.push(handscore[i]);
-    for(k=0;k<=handpoint.length-1;k++){
-        if (handpoint[k][5]>max){
-            max = handpoint[k][5];
-            idx = k;
-        }
-    }
-    render(idx,handpoint,datas);
-    return idx,handpoint,datas
-}
-
-//funzione per renderizzare i risultati a video
-var render = (index,handz,datas) =>{
-    scoreR = [];
-    console.log("i dati sono "+datas);
-    //handz.length come se contenesse numero giocatori
-    for(j=0;j<=handz.length-1;j++){
-        for(i=0;i<=4;i++){ 
-            var div = document.getElementsByClassName("player1")[j];
-            var img = document.createElement("img");
-            img.style.width="100%";
-            img.style.height="100%";
-            pattern = "img/cards/";
-            pattern+=handz[j][i];
-            pattern+=".jpg";
-            console.log(pattern);
-            img.src=pattern;
-            div.appendChild(img);
-            pattern="";
-            scoreR = handz[j][5];
-            
-    }
-    var scoreRender = document.createElement("p");
-    scoreRender.innerText= trad(scoreR);
-    div.appendChild(scoreRender);
-    }
-    var winnerDiv = document.querySelector(".winner");
-    winnerDiv.innerHTML="il punteggio più alto è "+trad(handz[index][5]); 
 }
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
 var createHand = (cards)=>{
@@ -215,7 +169,53 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
     console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)EVVIVA!
     return output;
 }
+//funzione per restituire la mano con punteggio piu alto
+var scoring = (handscore,datas) =>{
+    var handpoint = [];
+    var max = 0; idx=0;
 
+    for (i=0;i<=handscore.length-1;i++) handpoint.push(handscore[i]);
+    for(k=0;k<=handpoint.length-1;k++){
+        if (handpoint[k][5]>max){
+            max = handpoint[k][5];
+            idx = k;
+        }
+    }
+    render(idx,handpoint,datas);
+    return idx,handpoint,datas
+}
+//funzione per renderizzare i risultati a video
+var render = (index,handz,datas) =>{
+    scoreR = [];
+    console.log("i dati sono "+datas);
+    var div_1 = document.getElementsByClassName("player1")[0];
+    var p = document.createElement("p");
+    div_1.appendChild(p);
+    //handz.length come se contenesse numero giocatori
+    for(j=0;j<=handz.length-1;j++){
+        for(i=0;i<=4;i++){ 
+            var div = document.getElementsByClassName("player1")[j];
+            var img = document.createElement("img");
+            p.innerHTML=datas[0];
+            img.style.width="100%";
+            img.style.height="100%";
+            pattern = "img/cards/";
+            pattern+=handz[j][i];
+            pattern+=".jpg";
+            console.log(pattern);
+            img.src=pattern;
+            div.appendChild(img);
+            pattern="";
+            scoreR = handz[j][5];
+            
+    }
+    var scoreRender = document.createElement("p");
+    scoreRender.innerText= trad(scoreR);
+    div.appendChild(scoreRender);
+    }
+    var winnerDiv = document.querySelector(".winner");
+    winnerDiv.innerHTML="il punteggio più alto è "+trad(handz[index][5]); 
+}
 var occurrCalc = (fiveCard,numOcc) =>{
     //[2,3]
         if((numOcc[0]=== 2)&&(numOcc[1]=== 2)) score=16;

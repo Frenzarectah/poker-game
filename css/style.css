@@ -72,9 +72,14 @@ select{
     font-size:2em;
 
 }
-
+p{
+    margin:5px;
+}
 @media only screen and (max-width: 600px) {
 .table{
+    display:flex;
+    align-items:center;
+    width:95%;
     height:20%;
 }
 .form{
