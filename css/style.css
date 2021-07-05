@@ -10,9 +10,10 @@ body{
 }
 .abril{
     font-family:'Abril Fatface';
+    font-size:90%;
 }
     .abril_title{
-        font-size:15px;
+        font-size:80%;
     }
 .color--white{
     color:#ffff;

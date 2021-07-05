@@ -28,4 +28,16 @@ test("function that check if an array is made by consecutive numbers (after sort
     array1 = [5,2,3,4,5];
     expect(funct.consec(array1)).toBe(array1);
 });
+test("function that pushes the numeric score into the hand",()=>{
+    array = ["12C","4B","11C","3H","5D"];
+    var point = 18;
+    expect(funct.merging(array,point)).toHaveLength(6);
+});
+test("function that calculates the score of a noflush hand",()=>{
+    array = ["12C","11D","9H","10D","8S"];
+    value = [12,11,9,10,8];
+    seme = "C";
+    funct.checkNoflush(array,value,seme).toHaveLength(6);
+    funct.checkNoflush(array,value,seme).toContain(18);
+});
 

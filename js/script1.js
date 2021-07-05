@@ -1,5 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
-const seeds =["C","D","S","H"];
+const seeds =["C","H","S","D"];
 //sum calcola la somma dei punti della mano
 var sum = (array)=> {
     var tot = 0;
@@ -11,6 +11,7 @@ return tot;
 //funzione di traduzione tra il punteggio numerico e la corrispondente descrizione
 var trad = (num)=>{
     switch(num){
+        case 14: return "CARTA ALTA ALL'ASSO";break;
         case 15: return "COPPIA";break;
         case 16: return "DOPPIA COPPIA";break;
         case 17: return "TRIS";break;
@@ -20,15 +21,14 @@ var trad = (num)=>{
         case 21: return "POKER";break;
         case 22: return "SCALA A COLORE";break;
         case 23: return "SCALA REALE!!";break;
-        case 14: return "CARTA ALTA ALL'ASSO";break;
         default: return "CARTA ALTA";break;
     }
 }
 //calcola se mano è fatta da tutti valori consecutivi
 var consec = (array) =>{
     var n_consec = 1;
+    //ordina array in ordine decrescente
     array.sort(function(a, b){return b - a});
-  //5,4,3,2,1
   for (i=0;i<array.length;i++){
     if((array[i] - array[i+1])==1) n_consec++;
   }
@@ -48,6 +48,8 @@ var consec = (array) =>{
       else return false;
 }
 var deck = createDeck();  // creazione di variabile "deck" per conservare mazzo completo
+
+//funzione che prende in pancia i dati dal form e li utilizza per processare il gioco
 var sendData = () =>{
     var form = [];
     form[0] = document.querySelector(".name").value;
@@ -140,24 +142,26 @@ var checkFlush = (fiveC,valuesis,seed) =>{
     //console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)EVVIVA!
     return output;
 };
+// prende in rassegna l'array in caso non si tratti di un mazzo colore
 var checkNoflush = (fiveC,valuesis,seed) =>{
-    valuesis.sort();
+    valuesis = valuesis.sort(function(a, b){return b - a});
     var same = [];
     cont=1;j=0;
     console.log("carte:"+valuesis+" seed:"+seed);
-    if (consec(valuesis)===true){ 
-        console.log("scala!");
-        score = 18;
-    }
-    //11,11,14,14,14
-    for(i=0;i<valuesis.length;i++){    
-        if(valuesis[i]===valuesis[i+1]){
-            cont++;
-            same[j]=cont;
-        }else{
-            j++;
-            cont=1;
-        }  
+    //sfrutta la funct consec per decidere se il mazzo è una scala
+    if (consec(valuesis)===true){
+         score = 18;
+         console.log("centodigiottooo!");
+        } 
+    // creazione dell'array same che contiene il numero delle ripetizioni del mazzo
+        for(i=0;i<valuesis.length;i++){    
+            if(valuesis[i]===valuesis[i+1]){
+                cont++;
+                same[j]=cont;
+            }else{
+                j++;
+                cont=1;
+            }  
     };
     same = same.filter(()=>(el)=>{return el!==""}); //filtra gli elementi vuoti dell'array
     if (same.length!==0) occurrCalc(fiveC,same);
@@ -173,7 +177,7 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
 var scoring = (handscore,datas) =>{
     var handpoint = [];
     var max = 0; idx=0;
-
+    var msg = "";
     for (i=0;i<=handscore.length-1;i++) handpoint.push(handscore[i]);
     for(k=0;k<=handpoint.length-1;k++){
         if (handpoint[k][5]>max){
@@ -181,13 +185,16 @@ var scoring = (handscore,datas) =>{
             idx = k;
         }
     }
-    render(idx,handpoint,datas);
-    return idx,handpoint,datas
+    //aggiunta del messaggio di congratulazioni se la tua mano coincide con la vincitrice
+    if((handpoint[0]===handpoint[idx])) msg="congratulazioni, hai vinto questa mano!";
+    render(idx,handpoint,datas,msg);
+    return idx,handpoint,datas,msg;
 }
 //funzione per renderizzare i risultati a video
-var render = (index,handz,datas) =>{
+var render = (index,handz,datas,mess) =>{
     scoreR = [];
     console.log("i dati sono "+datas);
+    console.log("il messaggio è"+mess);
     var div_1 = document.getElementsByClassName("player1")[0];
     var p = document.createElement("p");
     div_1.appendChild(p);
@@ -214,8 +221,10 @@ var render = (index,handz,datas) =>{
     div.appendChild(scoreRender);
     }
     var winnerDiv = document.querySelector(".winner");
-    winnerDiv.innerHTML="il punteggio più alto è "+trad(handz[index][5]); 
+    winnerDiv.innerHTML=mess; 
+    winnerDiv.innerHTML+=" il punteggio più alto è "+trad(handz[index][5]);
 }
+//restituisce mano piu il suo punteggio (in base a ripetizioni nel mazzo)
 var occurrCalc = (fiveCard,numOcc) =>{
     //[2,3]
         if((numOcc[0]=== 2)&&(numOcc[1]=== 2)) score=16;
@@ -225,8 +234,8 @@ var occurrCalc = (fiveCard,numOcc) =>{
         else score =20;
     return fiveCard,score; //dato importantissimo fivecard + score (non ordinato, puro)
 }
-//funzione unicamente per aprire form di immissione dati
 
+//funzione unicamente per aprire form di immissione dati
 var openMenu = () =>{
     var btn_start = document.querySelector(".ace");
     var form = document.querySelector(".form");
@@ -234,13 +243,10 @@ var openMenu = () =>{
     btn_start.remove();
     form.style.display = "flex";
 }
-
-var merging = (fiveC,points) =>{ //aggiunge all'ultima posizione lo score del mazzo
+//aggiunge all'ultima posizione lo score del mazzo
+var merging = (fiveC,points) =>{ 
 fiveC.push(points);
 return fiveC;
 };
-//var arreyfinto = [["2C","3H","4S","7H","1B"],["12B","5A","11C","8H","3B"]];
-//console.log(render(1,arreyfinto));
-
-module.exports = {createDeck,createHand,sum,trad,consec};
+module.exports = {createDeck,createHand,sum,trad,consec,merging,checkNoflush};
 
