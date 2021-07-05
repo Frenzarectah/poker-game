@@ -148,11 +148,6 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
     var same = [];
     cont=1;j=0;
     console.log("carte:"+valuesis+" seed:"+seed);
-    //sfrutta la funct consec per decidere se il mazzo è una scala
-    if (consec(valuesis)===true){
-         score = 18;
-         console.log("centodigiottooo!");
-        } 
     // creazione dell'array same che contiene il numero delle ripetizioni del mazzo
         for(i=0;i<valuesis.length;i++){    
             if(valuesis[i]===valuesis[i+1]){
@@ -169,6 +164,11 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
         console.log(valuesis[0]);
         score = valuesis[0];
     }
+    //sfrutta la funct consec per decidere se il mazzo è una scala
+    if (consec(valuesis)===true){
+        score = 18;
+        console.log("centodigiottooo!");
+    } 
     output = merging(fiveC,score);
     console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)EVVIVA!
     return output;

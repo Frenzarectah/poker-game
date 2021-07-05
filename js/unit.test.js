@@ -34,10 +34,13 @@ test("function that pushes the numeric score into the hand",()=>{
     expect(funct.merging(array,point)).toHaveLength(6);
 });
 test("function that calculates the score of a noflush hand",()=>{
-    array = ["12C","11D","9H","10D","8S"];
+    array = ["12C","11D","9H","10D","8S"]; //its a color flush equals to 18 score
+    array1 = ["12C","11H","11C","12S","9H"]; //it's a double pair equals to 16 score
     value = [12,11,9,10,8];
+    value1 = [12,11,11,12,9];
     seme = "C";
-    funct.checkNoflush(array,value,seme).toHaveLength(6);
-    funct.checkNoflush(array,value,seme).toContain(18);
+    expect(funct.checkNoflush(array,value,seme)).toHaveLength(6);
+    expect(funct.checkNoflush(array,value,seme)).toContain(18);
+    expect(funct.checkNoflush(array1,value1,seme)).toContain(16);
 });
 
