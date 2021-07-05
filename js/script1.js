@@ -207,21 +207,21 @@ var render = (index,handz,datas,mess) =>{
     var p = document.createElement("p");
     div_1.appendChild(p);
     //handz.length come se contenesse numero giocatori
-    for(j=0;j<=handz.length-1;j++){
-        for(i=0;i<=4;i++){ 
-            var div = document.getElementsByClassName("player1")[j];
-            var img = document.createElement("img");
-            p.innerHTML=datas[0];
-            img.style.width="100%";
-            img.style.height="100%";
-            pattern = "img/cards/";
-            pattern+=handz[j][i];
-            pattern+=".jpg";
-            console.log(pattern);
-            img.src=pattern;
-            div.appendChild(img);
-            pattern="";
-            scoreR = handz[j][5];
+        for(j=0;j<=handz.length-1;j++){
+            for(i=0;i<=4;i++){ 
+                var div = document.getElementsByClassName("player1")[j];
+                var img = document.createElement("img");
+                p.innerHTML=datas[0];
+                img.style.width="100%";
+                img.style.height="100%";
+                pattern = "img/cards/";
+                pattern+=handz[j][i];
+                pattern+=".jpg";
+                console.log(pattern);
+                img.src=pattern;
+                div.appendChild(img);
+                pattern="";
+                scoreR = handz[j][5];
             
     }
     var scoreRender = document.createElement("p");
