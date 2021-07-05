@@ -49,6 +49,14 @@ var consec = (array) =>{
 }
 var deck = createDeck();  // creazione di variabile "deck" per conservare mazzo completo
 
+//funzione unicamente per aprire form di immissione dati
+var openMenu = () =>{
+    var btn_start = document.querySelector(".ace");
+    var form = document.querySelector(".form");
+    var table = document.querySelector(".table");
+    btn_start.remove();
+    form.style.display = "flex";
+}
 //funzione che prende in pancia i dati dal form e li utilizza per processare il gioco
 var sendData = () =>{
     var form = [];
@@ -76,11 +84,12 @@ var createGame = (data) =>{
     k = 0;
     var n_players = data[1]-1;
     for(k=0;k<=n_players;k++){
-        result[k] = createHand(deck);        //ENTRYPOINT ALGORITMO
+        result[k] = createHand(deck);        
         points[k] = score_calc(result[k]);  
+        console.log("eeheh"+points[k]);
     }
     //console.log("i points sono:"+points[0]);  //12C,2C,3H,7D,2D,13
-    scoring(points,data);
+    sorting(points,data);
 }
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
 var createHand = (cards)=>{
@@ -121,12 +130,12 @@ var score_calc = (fiveCard) =>{
         else s++;
     }
     if((c===5)||(d===5)||(h===5)||(s===5)) return checkFlush(fiveCard,value,c);
-        else  return checkNoflush(fiveCard,value,seed);
+        else return checkNoflush(fiveCard,value,seed);
 }
-
+//funzione per gestire i casi con mazzo flush
 var checkFlush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
-    totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano
+    totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano (utile per scala reale)
     if (totPoint === 60){ 
         console.log("scala reale!");
         score = 23;
@@ -139,7 +148,7 @@ var checkFlush = (fiveC,valuesis,seed) =>{
         score = 19;
     }
     output = merging(fiveC,score);
-    //console.log(output); //dato importantissimo hand + score di tale hand ( non ordinato, puro)EVVIVA!
+     //dato importantissimo hand + score di tale hand ( non ordinato, puro)
     return output;
 };
 // prende in rassegna l'array in caso non si tratti di un mazzo colore
@@ -167,14 +176,13 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
     //sfrutta la funct consec per decidere se il mazzo è una scala
     if (consec(valuesis)===true){
         score = 18;
-        console.log("centodigiottooo!");
     } 
     output = merging(fiveC,score);
-    console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)EVVIVA!
+    console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)
     return output;
 }
 //funzione per restituire la mano con punteggio piu alto
-var scoring = (handscore,datas) =>{
+var sorting = (handscore,datas) =>{
     var handpoint = [];
     var max = 0; idx=0;
     var msg = "";
@@ -222,7 +230,7 @@ var render = (index,handz,datas,mess) =>{
     }
     var winnerDiv = document.querySelector(".winner");
     winnerDiv.innerHTML=mess; 
-    winnerDiv.innerHTML+=" il punteggio più alto è "+trad(handz[index][5]);
+    winnerDiv.innerHTML+=" il punteggio più alto è "+trad(handz[index][5]); 
 }
 //restituisce mano piu il suo punteggio (in base a ripetizioni nel mazzo)
 var occurrCalc = (fiveCard,numOcc) =>{
@@ -235,18 +243,10 @@ var occurrCalc = (fiveCard,numOcc) =>{
     return fiveCard,score; //dato importantissimo fivecard + score (non ordinato, puro)
 }
 
-//funzione unicamente per aprire form di immissione dati
-var openMenu = () =>{
-    var btn_start = document.querySelector(".ace");
-    var form = document.querySelector(".form");
-    var table = document.querySelector(".table");
-    btn_start.remove();
-    form.style.display = "flex";
-}
 //aggiunge all'ultima posizione lo score del mazzo
 var merging = (fiveC,points) =>{ 
 fiveC.push(points);
 return fiveC;
 };
-module.exports = {createDeck,createHand,sum,trad,consec,merging,checkNoflush};
+module.exports = {createDeck,createHand,sum,trad,consec,merging,checkNoflush,checkFlush,occurrCalc};
 

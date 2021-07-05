@@ -28,7 +28,7 @@ test("function that check if an array is made by consecutive numbers (after sort
     array1 = [5,2,3,4,5];
     expect(funct.consec(array1)).toBe(array1);
 });
-test("function that pushes the numeric score into the hand",()=>{
+test("function that pushes the numeric score into the hand, resulting a 6-items array",()=>{
     array = ["12C","4B","11C","3H","5D"];
     var point = 18;
     expect(funct.merging(array,point)).toHaveLength(6);
@@ -43,4 +43,17 @@ test("function that calculates the score of a noflush hand",()=>{
     expect(funct.checkNoflush(array,value,seme)).toContain(18);
     expect(funct.checkNoflush(array1,value1,seme)).toContain(16);
 });
-
+test("function that calculates the score of a flush hand",()=>{
+    array = ["12H","13H","14H","11H","10H"]; //its a real flush, equals to 23 score
+    value = [12,14,11,10,13];
+    seme = "H";
+    array1 = ["7H","8H","9H","10H","11H"]; //its a straight flush, equals to 22 score
+    value1 = [7,8,9,11,10];
+    expect(funct.checkFlush(array,value,seme)).toContain(23);
+    expect(funct.checkFlush(array1,value1,seme)).toContain(22);
+});
+test("function that returns the score according to the occurrences of cards",()=>{
+    array1 = ["7H","7S","9D","9S","11H"];
+    occ = [2,2];
+    expect(funct.occurrCalc(array1,occ)).toBe(16);
+});
