@@ -73,6 +73,9 @@ select{
     font-size:2em;
 
 }
+.replay{
+    display:none;
+}
 p{
     margin:5px;
 }

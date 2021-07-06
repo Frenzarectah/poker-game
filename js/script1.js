@@ -1,40 +1,6 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
 const seeds =["C","H","S","D"];
-//sum calcola la somma dei punti della mano
-var sum = (array)=> {
-    var tot = 0;
-    for(i=0;i<array.length;i++) {
-        tot += parseInt(array[i]);
-    }
-return tot;
-};
-//funzione di traduzione tra il punteggio numerico e la corrispondente descrizione
-var trad = (num)=>{
-    switch(num){
-        case 14: return "CARTA ALTA ALL'ASSO";break;
-        case 15: return "COPPIA";break;
-        case 16: return "DOPPIA COPPIA";break;
-        case 17: return "TRIS";break;
-        case 18: return "SCALA";break;
-        case 19: return "COLORE";break;
-        case 20: return "FULL";break;
-        case 21: return "POKER";break;
-        case 22: return "SCALA A COLORE";break;
-        case 23: return "SCALA REALE!!";break;
-        default: return "CARTA ALTA";break;
-    }
-}
-//calcola se mano è fatta da tutti valori consecutivi
-var consec = (array) =>{
-    var n_consec = 1;
-    //ordina array in ordine decrescente
-    array.sort(function(a, b){return b - a});
-  for (i=0;i<array.length;i++){
-    if((array[i] - array[i+1])==1) n_consec++;
-  }
-  if (n_consec == 5) return true;
-  else return array;
-}
+
 //creazione tramite funzione del mazzo completo
  var createDeck = () =>{
     var deck =[];
@@ -60,6 +26,8 @@ var openMenu = () =>{
 //funzione che prende in pancia i dati dal form e li utilizza per processare il gioco
 var sendData = () =>{
     var form = [];
+    var replay_btn = document.querySelector(".replay");
+    replay_btn.style.display="block";
     form[0] = document.querySelector(".name").value;
     form[1]= document.querySelector(".select_player").value;
     if ((form[0] ==="")||(form[1] === "")){
@@ -201,8 +169,6 @@ var sorting = (handscore,datas) =>{
 //funzione per renderizzare i risultati a video
 var render = (index,handz,datas,mess) =>{
     scoreR = [];
-    console.log("i dati sono "+datas);
-    console.log("il messaggio è"+mess);
     var div_1 = document.getElementsByClassName("player1")[0];
     var p = document.createElement("p");
     div_1.appendChild(p);
@@ -232,6 +198,7 @@ var render = (index,handz,datas,mess) =>{
     winnerDiv.innerHTML=mess; 
     winnerDiv.innerHTML+=" il punteggio più alto è "+trad(handz[index][5]); 
 }
+/** UTILITY FUNCTS */
 //restituisce mano piu il suo punteggio (in base a ripetizioni nel mazzo)
 var occurrCalc = (fiveCard,numOcc) =>{
     //[2,3]
@@ -243,10 +210,49 @@ var occurrCalc = (fiveCard,numOcc) =>{
     return fiveCard,score; //dato importantissimo fivecard + score (non ordinato, puro)
 }
 
+//sum calcola la somma dei punti della mano
+var sum = (array)=> {
+    var tot = 0;
+    for(i=0;i<array.length;i++) {
+        tot += parseInt(array[i]);
+    }
+return tot;
+};
+//funzione di traduzione tra il punteggio numerico e la corrispondente descrizione
+var trad = (num)=>{
+    switch(num){
+        case 14: return "CARTA ALTA ALL'ASSO";break;
+        case 15: return "COPPIA";break;
+        case 16: return "DOPPIA COPPIA";break;
+        case 17: return "TRIS";break;
+        case 18: return "SCALA";break;
+        case 19: return "COLORE";break;
+        case 20: return "FULL";break;
+        case 21: return "POKER";break;
+        case 22: return "SCALA A COLORE";break;
+        case 23: return "SCALA REALE!!";break;
+        default: return "CARTA ALTA";break;
+    }
+}
+//calcola se mano è fatta da tutti valori consecutivi
+var consec = (array) =>{
+    var n_consec = 1;
+    //ordina array in ordine decrescente
+    array.sort(function(a, b){return b - a});
+  for (i=0;i<array.length;i++){
+    if((array[i] - array[i+1])==1) n_consec++;
+  }
+  if (n_consec == 5) return true;
+  else return array;
+}
+
 //aggiunge all'ultima posizione lo score del mazzo
 var merging = (fiveC,points) =>{ 
 fiveC.push(points);
 return fiveC;
 };
+
+
+
 module.exports = {createDeck,createHand,sum,trad,consec,merging,checkNoflush,checkFlush,occurrCalc};
 
