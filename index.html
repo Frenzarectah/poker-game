@@ -17,23 +17,21 @@
             <div class="player1"></div>
             <input type="button" class="replay" value="RESTART" onclick="window.location.reload()";>
             <img class="ace" alt="ace of spades" src="img/spadesAce.png" onclick="openMenu()">
-            <div class="form">
-                <input type="text" class="name" placeholder="Inserisci il tuo nome!" /required>
-                <div class="row">
-                    <p>Inserire numero di giocatori:</p>
-                    <select class="select_player" /required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-                <input type="button" value="START!" onclick=sendData();>
+        </div>
+        <div class="form">
+            <input type="text" class="name" placeholder="Inserisci il tuo nome!" /required>
+            <div class="row">
+                <p>Inserire numero di giocatori:</p>
+                <select class="select_player" /required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
             </div>
+            <input type="button" value="START!" onclick=sendData();>
         </div>
         <div class="text-align:center"><div class="winner"></div></div>
-        <div></div>
-        <div></div> 
         <div><input type="button" class="nextHand" value="PROSSIMA MANO" onclick="sendData();"></div>
     </body>
 </html>

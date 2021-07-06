@@ -100,7 +100,7 @@ var score_calc = (fiveCard) =>{
     if((c===5)||(d===5)||(h===5)||(s===5)) return checkFlush(fiveCard,value,c);
         else return checkNoflush(fiveCard,value,seed);
 }catch(e){
-    var div = document.querySelector(".player1");
+    var div = document.getElementsByClassName("player1")[1];
     div.innerHTML="GIOCO FINITO!";
     var restart_btn = document.querySelector(".replay");
     restart_btn.style.display="block";
