@@ -189,7 +189,6 @@ var render = (index,handz,datas,mess) =>{
                 pattern = "img/cards/";
                 pattern+=handz[j][i];
                 pattern+=".jpg";
-                console.log(pattern);
                 img.src=pattern;
                 div.appendChild(img);
                 pattern="";

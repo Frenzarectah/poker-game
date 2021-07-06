@@ -70,7 +70,7 @@ select{
     font-family:'Abril Fatface';
     align-items:center;
     justify-content: center;
-    font-size:2em;
+    font-size:1em;
 
 }
 .nextHand{
@@ -96,6 +96,8 @@ select{
     height:50%;
 }
 .player1{
+    width:9%;
+    height:18%;
     font-size:0.5em;
 }
 .winner{
