@@ -1,4 +1,7 @@
-# Poker Game  <b>[work in progress]</b>
+# Poker Game
+
+<a href="https://poker-game-frenz.netlify.app/">Try It here!</a>
+
 
 Given various poker hands as arguments, print what type of hand each argument is.
 
