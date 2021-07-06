@@ -26,7 +26,7 @@ var openMenu = () =>{
 //funzione che prende in pancia i dati dal form e li utilizza per processare il gioco
 var sendData = () =>{
     var form = [];
-    var replay_btn = document.querySelector(".replay");
+    var replay_btn = document.querySelector(".nextHand");
     replay_btn.style.display="block";
     form[0] = document.querySelector(".name").value;
     form[1]= document.querySelector(".select_player").value;
@@ -54,9 +54,8 @@ var createGame = (data) =>{
     for(k=0;k<=n_players;k++){
         result[k] = createHand(deck);        
         points[k] = score_calc(result[k]);  
-        console.log("eeheh"+points[k]);
     }
-    //console.log("i points sono:"+points[0]);  //12C,2C,3H,7D,2D,13
+    //points[0]: 12C,2C,3H,7D,2D,13
     sorting(points,data);
 }
 //funzione che dato il mazzo completo, crea una mano da 5 carte non ripetute e casuali
@@ -78,6 +77,7 @@ var score_calc = (fiveCard) =>{
     var seed = [];
     var c = 0; h = 0;d = 0;s = 0;
     values = 0;
+    try{
     for(i=0;i<=4;i++){
         //fiveCard = fiveCard.sort(function(a, b){return b - a});
         seed[i] = fiveCard[i].charAt(fiveCard[i].length-1);
@@ -99,6 +99,12 @@ var score_calc = (fiveCard) =>{
     }
     if((c===5)||(d===5)||(h===5)||(s===5)) return checkFlush(fiveCard,value,c);
         else return checkNoflush(fiveCard,value,seed);
+}catch(e){
+    var div = document.querySelector(".player1");
+    div.innerHTML="GIOCO FINITO!";
+    var restart_btn = document.querySelector(".replay");
+    restart_btn.style.display="block";
+}
 }
 //funzione per gestire i casi con mazzo flush
 var checkFlush = (fiveC,valuesis,seed) =>{

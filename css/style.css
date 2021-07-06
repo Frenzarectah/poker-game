@@ -73,6 +73,9 @@ select{
     font-size:2em;
 
 }
+.nextHand{
+    display:none;
+}
 .replay{
     display:none;
 }
