@@ -1,6 +1,5 @@
 const num = [2,3,4,5,6,7,8,9,10,11,12,13,14];
 const seeds =["C","H","S","D"];
-
 //creazione tramite funzione del mazzo completo
  var createDeck = () =>{
     var deck =[];
@@ -13,8 +12,7 @@ const seeds =["C","H","S","D"];
       if (deck.length === 52) return deck;
       else return false;
 }
-var deck = createDeck();  // creazione di variabile "deck" per conservare mazzo completo
-
+var deck = createDeck(); // creazione di variabile "deck" per conservare mazzo completo
 //funzione unicamente per aprire form di immissione dati
 var openMenu = () =>{
     var btn_start = document.querySelector(".ace");
@@ -66,12 +64,12 @@ var createHand = (cards)=>{
         leng = cards.length-1;
         x = Math.round(Math.random()*leng);
         hand[i] = cards[x];
-        cards.splice(x,1);
+        cards.splice(x,1);  //permette di eliminare l'elemento dopo averlo immesso in hand in modo da non ritrovarlo
         i++;
     }
     return hand;
 }
-//funzione che calcola il punteggio in base alle regole del poker 5 carte
+//funzione che calcola il punteggio suddividendo la mano in valore carte e loro seme
 var score_calc = (fiveCard) =>{
     var value =[];
     var seed = [];
@@ -106,7 +104,7 @@ var score_calc = (fiveCard) =>{
     restart_btn.style.display="block";
 }
 }
-//funzione per gestire i casi con mazzo flush
+//funzione per gestire i casi con mazzo flush e restituirne lo score
 var checkFlush = (fiveC,valuesis,seed) =>{
     valuesis.sort();
     totPoint = sum(valuesis); //totPoint contiene la somma di tutti i punti della mano (utile per scala reale)
@@ -122,16 +120,15 @@ var checkFlush = (fiveC,valuesis,seed) =>{
         score = 19;
     }
     output = merging(fiveC,score);
-     //dato importantissimo hand + score di tale hand ( non ordinato, puro)
+     //mano + score di tale hand ( non ordinato, puro)
     return output;
 };
-// prende in rassegna l'array in caso non si tratti di un mazzo colore
+// prende in rassegna l'array in caso non si tratti di un mazzo colore e ne restituisce lo score
 var checkNoflush = (fiveC,valuesis,seed) =>{
     valuesis = valuesis.sort(function(a, b){return b - a});
     var same = [];
     cont=1;j=0;
-    console.log("carte:"+valuesis+" seed:"+seed);
-    // creazione dell'array same che contiene il numero delle ripetizioni del mazzo
+    // creazione dell'array same[] che contiene il numero delle ripetizioni del mazzo
         for(i=0;i<valuesis.length;i++){    
             if(valuesis[i]===valuesis[i+1]){
                 cont++;
@@ -139,21 +136,20 @@ var checkNoflush = (fiveC,valuesis,seed) =>{
             }else{
                 j++;
                 cont=1;
-            }  
+            }
+        //es. same: [3,"",2];  
     };
     same = same.filter(()=>(el)=>{return el!==""}); //filtra gli elementi vuoti dell'array
     if (same.length!==0) occurrCalc(fiveC,same);
     else{ 
-        console.log(valuesis[0]);
-        score = valuesis[0];
+        score = valuesis[0]; // lo score in questo caso è il punteggio della carta alta (il primo dell'array ordinato)
     }
     //sfrutta la funct consec per decidere se il mazzo è una scala
     if (consec(valuesis)===true){
         score = 18;
     } 
-    output = merging(fiveC,score);
-    console.log(output); //ritorno di mazzo con suo score (non ordinato, puro)
-    return output;
+    output = merging(fiveC,score); 
+    return output; //ritorno di mazzo con suo score (non ordinato, puro)
 }
 //funzione per restituire la mano con punteggio piu alto
 var sorting = (handscore,datas) =>{
