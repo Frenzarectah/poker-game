@@ -164,7 +164,7 @@ var sorting = (handscore,datas) =>{
         }
     }
     //aggiunta del messaggio di congratulazioni se la tua mano coincide con la vincitrice
-    if((handpoint[0]===handpoint[idx])) msg="congratulazioni, hai vinto questa mano!";
+    if((handpoint[0]===handpoint[idx])) msg="congratulazioni, hai vinto questa mano!</br>";
     render(idx,handpoint,datas,msg);
     return idx,handpoint,datas,msg;
 }
@@ -175,7 +175,7 @@ var render = (index,handz,datas,mess) =>{
     var p = document.createElement("p");
     div_1.appendChild(p);
     //handz.length come se contenesse numero giocatori
-        for(j=0;j<=handz.length-1;j++){
+        for(j=0;j<=datas[1]-1;j++){
             for(i=0;i<=4;i++){ 
                 var div = document.getElementsByClassName("player1")[j];
                 var img = document.createElement("img");
